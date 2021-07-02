@@ -1,13 +1,11 @@
-import * as React from 'react';
+import React, { memo } from 'react';
+
 import { Card } from 'antd';
 
-const { memo } = React;
+import { JobCardProps } from './type';
+import { s } from './style';
 
-interface IProps {
-	job: IDataJob;
-}
-
-const JobCard: React.FC<IProps> = memo(props => {
+export const JobCard: React.FC<JobCardProps> = memo(props => {
 	const { job } = props;
 
 	return (
@@ -21,13 +19,5 @@ const JobCard: React.FC<IProps> = memo(props => {
 		</Card>
 	);
 });
-
-const s: Stylesheet = {
-	title: {
-		textAlign: 'center',
-		fontSize: 20,
-		fontWeight: 'bold'
-	}
-};
 
 export default JobCard;

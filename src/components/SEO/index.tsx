@@ -1,9 +1,9 @@
-import React from "react"
+import React, { memo } from "react"
 
 import Helmet from "react-helmet"
 import { SEOProps } from "./type";
 
-const SEO: React.FC<SEOProps> = (props) => {
+const SEO: React.FC<SEOProps> = memo(props => {
   const { title, description = '', lang = 'en', meta = [], author = '' } = props;
 
   return (
@@ -50,9 +50,6 @@ const SEO: React.FC<SEOProps> = (props) => {
       ]}
     />
   )
-}
-
-
-
+})
 
 export default SEO

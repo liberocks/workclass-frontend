@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from 'react';
+
 import { LoadingOutlined } from '@ant-design/icons';
-import * as React from 'react';
+
 import { Col, message, Row, Spin, Typography } from 'antd';
 import { getJobs } from '../common/api';
-import JobCard from '../components/job-card';
+import JobCard from '../components/JobCard';
 
-const { useEffect, useState } = React;
-const { Title } = Typography;
 
 const IndexPage: React.FC = () => {
 	const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const IndexPage: React.FC = () => {
 	return (
 		<Row justify="center" gutter={[20, 20]}>
 			<Col span={24}>
-				<Title style={s.title}>Jobs</Title>
+				<Typography.Title style={s.title}>Jobs</Typography.Title>
 			</Col>
 
 			{loading && (
