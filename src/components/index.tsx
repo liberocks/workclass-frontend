@@ -1,2 +1,2 @@
-export * from './JobCard';
-export * from './SEO';
+export * from "./JobCard";
+export * from "./SEO";

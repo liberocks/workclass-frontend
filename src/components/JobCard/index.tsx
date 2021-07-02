@@ -1,11 +1,9 @@
-import React, { memo } from 'react';
+import { s } from "./style";
+import { JobCardProps } from "./type";
+import { Card } from "antd";
+import React, { memo } from "react";
 
-import { Card } from 'antd';
-
-import { JobCardProps } from './type';
-import { s } from './style';
-
-export const JobCard: React.FC<JobCardProps> = memo(props => {
+export const JobCard: React.FC<JobCardProps> = memo((props) => {
 	const { job } = props;
 
 	return (

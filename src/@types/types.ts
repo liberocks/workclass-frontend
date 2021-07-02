@@ -1,3 +1,3 @@
-type TJobCard = 'suggested' | 'similar' | 'normal';
+type TJobCard = "suggested" | "similar" | "normal";
 
-type TSalaryPeriod = 'monthly' | 'daily' | 'yearly' | 'hourly';
+type TSalaryPeriod = "monthly" | "daily" | "yearly" | "hourly";
