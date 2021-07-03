@@ -18,7 +18,7 @@ COPY . /app/
 RUN yarn clean
 RUN yarn build
 
-EXPOSE 9000
+EXPOSE 1234
 
-CMD ["yarn", "serve"]
+CMD ["yarn", "serve", "-p", "1234"]
 
