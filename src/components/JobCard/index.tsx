@@ -18,7 +18,7 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 	const { md, lg } = useBreakpoint()
 
 	const cardWidth = !md ? '95vw' : !lg ? 500 : 325;
-	const titleWidth = !md ? '80vw' : !lg ? 425 : 300;
+	const titleWidth = !md ? '80vw' : !lg ? 425 : 275;
 
 	const onClickApplyButton = (event) => {
 		event.stopPropagation();

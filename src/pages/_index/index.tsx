@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import { Col, message, Row, Spin, Typography, Grid, Space, Checkbox, Form, Menu, Input, Button, Image, Layout } from 'antd';
+import moment from 'moment';
 
+import { JobCard, ShowIf } from '../../components';
 
-
-import { getJobs } from '../../common/api';
-import JobCard from '../../components/JobCard';
 import { s } from './style';
 import { Sidebar } from './Sidebar'
-import moment from 'moment';
+import { useQuery } from './useQuery';
+
 
 const { useBreakpoint } = Grid
 const { Search } = Input;
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Content } = Layout;
 
 
 const IndexPage: React.FC = () => {
-	const [loading, setLoading] = useState(false);
-	const [jobs, setJobs] = useState<IDataJob[]>([]);
+	const { loading, jobs, loadJobs, query } = useQuery()
 	const { md, lg, } = useBreakpoint()
 
 	const containerPadding = !md ? 0 : !lg ? 25 : 50;
@@ -28,30 +27,31 @@ const IndexPage: React.FC = () => {
 
 	useEffect(() => {
 		/**
-		 * On load, we fetch newest jobs
+		 * On load, fetch newest jobs
 		 */
-
-		const loadJobs = async () => {
-			setLoading(true);
-			try {
-				const data = await getJobs();
-				setJobs(data.jobs);
-			} catch {
-				// We set the jobs to empty array in the case of failures
-				setJobs([]);
-				message.error('Failed to load jobs, please try again later');
-			} finally {
-				setLoading(false);
+		loadJobs({
+			errorCallback: () => {
+				message.error("Failed to load jobs, please try again later");
 			}
-		};
-
-		loadJobs();
+		});
 	}, []);
+
+	useEffect(() => {
+		/**
+		 * On load, fetching jobs corresponds to the query
+		 */
+		loadJobs({
+			errorCallback: () => {
+				message.error("Failed to load jobs, please try again later");
+			}
+		});
+	}, [query])
 
 	return (
 		<Layout style={{ background: 'white' }}>
 			<Content>
 				<Row style={{ ...s.container, padding: `0 ${containerPadding}px`, maxWidth: containerWidth }}>
+
 					<Col span={24}>
 						<Typography.Title style={s.title}>Jobs</Typography.Title>
 					</Col>
@@ -62,32 +62,28 @@ const IndexPage: React.FC = () => {
 						</Row>
 					</Col>
 
-					{loading && (
-						<Col span={24}>
-							<Row justify="center">
-								<Spin indicator={<LoadingOutlined style={{ fontSize: 50 }} />} />
-							</Row>
-						</Col>
-					)}
-
 					<Col md={24} lg={24} xl={4} style={s.sidebar_container}>
 						<Sidebar />
 					</Col>
 					<Col md={24} lg={20} >
-						<Space wrap size={[16, 16]} style={s.card_space} >
-							{jobs.map(job => (
-								<JobCard job={job} key={job.job_id} />
-							))}
-						</Space>
+						<ShowIf condition={!loading}>
+							<Space wrap size={[16, 16]} style={s.card_space} >
+								{jobs.map(job => (
+									<JobCard job={job} key={job.job_id} />
+								))}
+							</Space>
+						</ShowIf>
+						<ShowIf condition={loading}>
+							<div style={{ textAlign: 'center', minHeight: '50vh' }}>
+								<Spin indicator={<LoadingOutlined style={{ fontSize: 50, marginTop: '50%' }} />} />
+							</div>
+						</ShowIf>
 						<Row style={{ textAlign: 'center' }}>
 							<Col span={24} >
 								<Button type="primary" style={s.load_more}>Load more</Button>
 							</Col>
 						</Row>
 					</Col>
-
-
-
 				</Row >
 			</Content>
 			<Footer style={s.footer}>

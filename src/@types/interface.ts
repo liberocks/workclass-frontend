@@ -27,7 +27,32 @@ interface IEndpointJob extends IDefaultReturn {
 // ==========================
 // Data Types
 // ==========================
-interface IDataJob {
+interface IJobCategory {
+  job_admin: boolean | null;
+  job_covid19: boolean | null;
+  job_customerservice: boolean | null;
+  job_distributionshipping: boolean | null;
+  job_grocery: boolean | null;
+  job_hospitalityhotel: boolean | null;
+  job_marketingsales: boolean | null;
+  job_other: boolean | null;
+  job_production: boolean | null;
+  job_restaurantfoodservice: boolean | null;
+  job_retail: boolean | null;
+  job_supplychain: boolean | null;
+  job_transportation: boolean | null;
+  job_warehouse: boolean | null;
+}
+
+interface IEmploymentType {
+  employ_adhoc: boolean | null;
+  employ_contract: boolean | null;
+  employ_fulltime: boolean | null;
+  employ_internship: boolean | null;
+  employ_parttime: boolean | null;
+}
+
+interface IDataJob extends IJobCategory, IEmploymentType {
   job_id: number | string;
   title: string;
   activation_date: string;
@@ -37,38 +62,27 @@ interface IDataJob {
   salary_period: TSalaryPeriod;
   company_name: string;
   description: string;
-  employ_adhoc: boolean;
-  employ_contract: boolean;
-  employ_fulltime: boolean;
-  employ_internship: boolean;
-  employ_parttime: boolean;
   featured: boolean;
-  job_admin: boolean;
-  job_covid19: boolean;
-  job_customerservice: boolean;
-  job_distributionshipping: boolean;
-  job_grocery: boolean;
-  job_hospitalityhotel: boolean;
-  job_marketingsales: boolean;
-  job_other: boolean;
-  job_production: boolean;
-  job_restaurantfoodservice: boolean;
-  job_retail: boolean;
-  job_supplychain: boolean;
-  job_transportation: boolean;
-  job_warehouse: boolean;
   logo_url: string;
   monthly_salary_median: number;
-
   salary_median: number;
+}
+
+interface IMetadata {
+  page: number;
+  page_size: number;
+  total: number;
+  total_item: number;
+  total_page: number;
 }
 
 // ==========================
 // Others Types
 // ==========================
-interface IJobsFilter {
-  pageSize?: number;
-  keyword?: string;
+interface IJobsFilter extends Partial<IJobCategory>, Partial<IEmploymentType> {
+  page_size?: number;
+  keyword?: string | null;
+  rank_by?: string | null;
 }
 
 interface ICreateNewJob {
