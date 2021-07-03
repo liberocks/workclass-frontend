@@ -16,9 +16,8 @@ RUN yarn --pure-lockfile
 COPY . /app/
 
 RUN node_modules/.bin/gatsby build
-RUN node_modules/.bin/gatsby serve -H 0.0.0.0
 
 EXPOSE 1234
 
-CMD ["./run.sh"]
+CMD ["node_modules/.bin/gatsby", "serve", "-H", "0.0.0.0"]
 
