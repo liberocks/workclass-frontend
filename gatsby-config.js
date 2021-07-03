@@ -50,17 +50,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-firebase`,
+      resolve: `gatsby-plugin-less`,
       options: {
-        credentials: {
-          apiKey: "XYZ",
-          authDomain: "XYZ",
-          databaseURL: "XYZ",
-          projectId: "XYZ",
-          storageBucket: "XYZ",
-          messagingSenderId: "XYZ",
-          appId: "XYZ",
-          measurementId: "XYZ",
+        lessOptions: {
+          javascriptEnabled: true,
         },
       },
     },

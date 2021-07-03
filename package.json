@@ -1,6 +1,6 @@
 {
   "name": "workclass-front-end-template",
-  "private": true,
+  "private": false,
   "description": "A simple starter to get up and developing quickly",
   "version": "0.1.0",
   "author": "WorkClass <hello@workclass.co>",
@@ -12,8 +12,8 @@
     "gatsby": "^3.7.1",
     "gatsby-image": "^3.7.1",
     "gatsby-plugin-antd": "^2.2.0",
-    "gatsby-plugin-firebase": "^0.2.0-beta.4",
     "gatsby-plugin-layout": "^2.7.1",
+    "gatsby-plugin-less": "^5.8.0",
     "gatsby-plugin-manifest": "^3.7.1",
     "gatsby-plugin-offline": "^4.7.1",
     "gatsby-plugin-react-helmet": "^4.7.1",
