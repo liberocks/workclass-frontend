@@ -16,7 +16,6 @@ export const SEO: React.FC<SEOProps> = memo((props) => {
 
   return (
     <Helmet>
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
