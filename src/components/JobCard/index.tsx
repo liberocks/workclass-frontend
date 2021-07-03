@@ -5,11 +5,13 @@ import { Card, Image, Button, Space, Tooltip, Grid, Row, Col, Badge } from "antd
 
 import moment from "moment";
 
+import { ShowIf } from "../../components/ShowIf";
 import { FALLBACK_IMAGE } from "../../common/constant";
 import JobTag from "../JobTag";
 
 import { s } from "./style";
 import { JobCardProps } from "./type";
+
 const { useBreakpoint } = Grid;
 
 
@@ -25,10 +27,7 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 		window.location.href = 'https://workclass.co/apply'
 	}
 
-	const onClickMessageButton = (event) => {
-		event.stopPropagation();
-		window.location.href = 'https://t.me/workclasssgbot?start=XXX'
-	}
+
 
 	const onClickCard = () => {
 		window.location.href = `/job/${job.job_id}`
@@ -36,7 +35,7 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 
 	return (
 		<Card hoverable onClick={onClickCard} style={{ ...s.card, width: cardWidth }} actions={[
-			<Button style={s.button} onClick={onClickMessageButton}>Messages</Button>,
+			<Button style={s.button}>Details</Button>,
 			<Button style={s.button} type='primary' onClick={onClickApplyButton}>Apply Now</Button>,
 		]} >
 			<Row style={s.card_header}>
@@ -47,12 +46,23 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 					<p style={s.activation_date}>{moment(job.activation_date).fromNow()}</p></Col>
 			</Row>
 
+			<p style={s.company_name}>{job.company_name}</p>
 			<Tooltip title={job.title}>
 				<p style={{ ...s.title, width: titleWidth }} > {job.title}</p>
 			</Tooltip>
-			<p style={s.company_name}>{job.company_name}</p>
 
-			<p style={s.salary}>  ${job.salary_to} to ${job.salary_from} ({job.salary_period})</p>
+			<Tooltip title={`approx $${job.monthly_salary_median} monthly`}>
+				<ShowIf condition={!!job.salary_from && !job.salary_to}>
+					<p style={s.salary}>${job.salary_from} ({job.salary_period})</p>
+				</ShowIf>
+				<ShowIf condition={!job.salary_from && !!job.salary_to}>
+					<p style={s.salary}>${job.salary_to} ({job.salary_period})</p>
+				</ShowIf>
+				<ShowIf condition={!!job.salary_from && !!job.salary_to}>
+					<p style={s.salary}>${job.salary_from} to ${job.salary_to} ({job.salary_period})</p>
+				</ShowIf>
+
+			</Tooltip>
 			<JobTag job={job} showEmploymentTypeTag />
 		</Card >
 	);

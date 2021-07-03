@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { Space, Collapse, Checkbox, Col, Form, Row, Grid, Radio } from 'antd';
+
 import { s } from './style';
+import { SidebarProps } from './type'
 
 const { Panel } = Collapse;
 const { useBreakpoint } = Grid;
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<SidebarProps> = ({ query, setQuery }) => {
   const { md, lg, xl, xxl } = useBreakpoint()
 
   const sidebarSize = !md ? '95vw' : !lg ? '50vw' : !xl ? '70vw' : !xxl ? 200 : 200;

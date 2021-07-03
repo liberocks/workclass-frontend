@@ -1,4 +1,3 @@
-import { useViewport } from "./viewport";
-import { useWindowDimensions } from "./window";
-
-export { useWindowDimensions, useViewport };
+export * from "./viewport";
+export * from "./window";
+export * from "./useQuery";

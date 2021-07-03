@@ -1,0 +1,16 @@
+export const JOBS_SELECT_QUERY = [
+  "employ_adhoc",
+  "employ_contract",
+  "employ_fulltime",
+  "employ_internship",
+  "employ_parttime",
+  "title",
+  "salary_from",
+  "salary_to",
+  "salary_period",
+  "monthly_salary_median",
+  "job_id",
+  "logo_url",
+  "company_name",
+  "activation_date",
+];

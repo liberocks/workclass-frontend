@@ -44,6 +44,7 @@ export const s: Stylesheet = {
   },
   card_header: {
     justifyContent: "space-between",
+    marginBottom: 10,
   },
   short_description: {
     maxHeight: 100,

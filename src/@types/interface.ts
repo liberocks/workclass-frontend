@@ -18,6 +18,7 @@ interface IRequest {
 
 interface IEndpointJobs extends IDefaultReturn {
   jobs: IDataJob[];
+  metadata: IMetadata;
 }
 
 interface IEndpointJob extends IDefaultReturn {
@@ -83,6 +84,8 @@ interface IJobsFilter extends Partial<IJobCategory>, Partial<IEmploymentType> {
   page_size?: number;
   keyword?: string | null;
   rank_by?: string | null;
+  page?: number | null;
+  select?: string[] | string | null;
 }
 
 interface ICreateNewJob {

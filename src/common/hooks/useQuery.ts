@@ -1,7 +1,9 @@
 import { getJobs } from "../../common/api";
+import { message } from "antd";
+import uniqBy from "lodash/uniqBy";
 import { useState } from "react";
 
-export const useQuery = () => {
+export const useQuery = ({ select = [] }: { select?: string[] }) => {
   const [loading, setLoading] = useState(true);
 
   const [jobs, setJobs] = useState<IDataJob[]>([]);
@@ -35,10 +37,13 @@ export const useQuery = () => {
     employ_parttime: null,
     keyword: null,
     rank_by: null,
+    select,
   });
 
   const loadJobs = async ({
-    errorCallback,
+    errorCallback = () => {
+      message.error("Failed to load jobs, please try again later");
+    },
   }: {
     errorCallback?: () => void;
   }) => {
@@ -50,16 +55,19 @@ export const useQuery = () => {
         if (k.startsWith("job_") || k.startsWith("employ_")) {
           if (v === false) filters[k] = "0";
           if (v === true) filters[k] = "1";
-        } else {
+        } else if (k === "select") {
+          if (v.length > 0) filters[k] = v.join(",");
+        } else if (v !== null) {
           filters[k] = v;
         }
       }
 
       const data = await getJobs(filters);
-      setJobs(data.jobs);
+      setJobs(uniqBy([...jobs, ...data.jobs], "job_id"));
+      setMetadata(data.metadata);
     } catch {
       // We set the jobs to empty array in the case of failures
-      setJobs([]);
+      setJobs([...jobs]);
 
       if (errorCallback) errorCallback();
     } finally {
