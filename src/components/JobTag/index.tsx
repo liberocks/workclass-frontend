@@ -6,7 +6,7 @@ import { Card, Image, Button, Space, Tooltip, Grid, Row, Col, Tag } from "antd";
 import { JobTagProps } from './type'
 import { s } from './style';
 
-export const JobSpecTag: React.FC<JobTagProps> = ({ job, showJobCategoryTag, showEmploymentTypeTag }) => {
+export const JobTag: React.FC<JobTagProps> = ({ job, showJobCategoryTag, showEmploymentTypeTag }) => {
   const renderTag = () => {
     const tags = []
 
@@ -43,4 +43,4 @@ export const JobSpecTag: React.FC<JobTagProps> = ({ job, showJobCategoryTag, sho
   return <Space wrap>{renderTag()}</Space>
 }
 
-export default JobSpecTag
+export default JobTag

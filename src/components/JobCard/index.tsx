@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
-
-import { Card, Image, Button, Space, Tooltip, Grid, Row, Col, Badge } from "antd";
+import { navigate } from 'gatsby';
+import { Card, Image, Button, Tooltip, Grid, Row, Col } from "antd";
 
 import moment from "moment";
 
@@ -14,8 +14,6 @@ import { JobCardProps } from "./type";
 
 const { useBreakpoint } = Grid;
 
-
-
 export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 	const { md, lg } = useBreakpoint()
 
@@ -27,10 +25,8 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 		window.location.href = 'https://workclass.co/apply'
 	}
 
-
-
 	const onClickCard = () => {
-		window.location.href = `/job/${job.job_id}`
+		navigate(`/job/${job.job_id}`);
 	}
 
 	return (
@@ -43,7 +39,8 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 					<Image src={job.logo_url || "error"} style={s.image} preview={false} fallback={FALLBACK_IMAGE} />
 				</Col>
 				<Col span={12}>
-					<p style={s.activation_date}>{moment(job.activation_date).fromNow()}</p></Col>
+					<p style={s.activation_date}>{moment(job.activation_date).fromNow()}</p>
+				</Col>
 			</Row>
 
 			<p style={s.company_name}>{job.company_name}</p>
@@ -61,7 +58,6 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 				<ShowIf condition={!!job.salary_from && !!job.salary_to}>
 					<p style={s.salary}>${job.salary_from} to ${job.salary_to} ({job.salary_period})</p>
 				</ShowIf>
-
 			</Tooltip>
 			<JobTag job={job} showEmploymentTypeTag />
 		</Card >
