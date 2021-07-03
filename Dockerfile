@@ -15,8 +15,8 @@ RUN yarn --pure-lockfile
 # Copy all frontend stuff to new "app" folder
 COPY . /app/
 
-RUN ts-node node_modules/.bin/gatsby build
-RUN ts-node node_modules/.bin/gatsby serve -H 0.0.0.0
+RUN node_modules/.bin/gatsby build
+RUN node_modules/.bin/gatsby serve -H 0.0.0.0
 
 EXPOSE 1234
 
