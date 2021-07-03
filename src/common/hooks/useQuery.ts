@@ -41,11 +41,13 @@ export const useQuery = ({ select = [] }: { select?: string[] }) => {
   });
 
   const loadJobs = async ({
+    except = [],
     errorCallback = () => {
       message.error("Failed to load jobs, please try again later");
     },
   }: {
     errorCallback?: () => void;
+    except?: number[];
   }) => {
     setLoading(true);
     try {
@@ -63,7 +65,11 @@ export const useQuery = ({ select = [] }: { select?: string[] }) => {
       }
 
       const data = await getJobs(filters);
-      setJobs(uniqBy([...jobs, ...data.jobs], "job_id"));
+      setJobs(
+        uniqBy([...jobs, ...data.jobs], "job_id").filter(
+          (item) => !except.includes(item.job_id)
+        )
+      );
       setMetadata(data.metadata);
     } catch {
       // We set the jobs to empty array in the case of failures

@@ -5,12 +5,9 @@ import React, { useState, useEffect } from "react";
 import { navigate } from "gatsby";
 import { message, Layout, Row, Col, Divider, Button, Grid, Space } from "antd";
 import { ArrowLeftOutlined } from '@ant-design/icons';
-
 import moment from 'moment';
 import ReactHtmlParser from 'react-html-parser';
-
 import pickBy from 'lodash/pickBy';
-
 
 import { getJob } from "../../common/api";
 import { SEO, JobTag, ShowIf, JobCard } from "../../components";
@@ -25,7 +22,7 @@ const { useBreakpoint } = Grid
 
 
 const JobDetail: React.FC<JobDetailProps> = (props) => {
-  const { jobs, loadJobs, query, setQuery, metadata, resetJobs } = useQuery({ select: JOBS_SELECT_QUERY });
+  const { jobs, loadJobs, query, setQuery } = useQuery({ select: JOBS_SELECT_QUERY });
   const [job, setJob] = useState<IDataJob | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -52,7 +49,7 @@ const JobDetail: React.FC<JobDetailProps> = (props) => {
 
   useEffect(() => {
     // Fetch jobs corresponding to the query
-    loadJobs({});
+    loadJobs({ except: [parseInt(job_id)] });
   }, [query])
 
   const onBack = () => {

@@ -54,7 +54,7 @@ interface IEmploymentType {
 }
 
 interface IDataJob extends IJobCategory, IEmploymentType {
-  job_id: number | string;
+  job_id: number;
   title: string;
   activation_date: string;
   active: boolean;
