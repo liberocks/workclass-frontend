@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
-import { navigate } from "gatsby";
+import { navigate, PageProps } from "gatsby";
 import { message, Layout, Row, Col, Divider, Button, Grid, Space } from "antd";
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import moment from 'moment';
@@ -14,14 +14,13 @@ import { SEO, JobTag, ShowIf, JobCard } from "../../components";
 import { useQuery } from "../../common/hooks";
 import { JOBS_SELECT_QUERY } from "../../common/constant";
 
-import { JobDetailProps } from "./type";
 import { s } from './style';
 
 const { Footer, Content } = Layout;
 const { useBreakpoint } = Grid
 
 
-const JobDetail: React.FC<JobDetailProps> = (props) => {
+const JobDetail: React.FC<PageProps> = (props) => {
   const { jobs, loadJobs, query, setQuery, resetJobs, loading: jobsLoading } = useQuery({ select: JOBS_SELECT_QUERY });
   const [job, setJob] = useState<IDataJob | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
