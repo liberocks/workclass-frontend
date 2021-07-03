@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import { Col, message, Row, Spin, Typography, Grid, Space, Checkbox, Form, Menu, Input, Button, Image, Layout } from 'antd';
@@ -16,8 +16,9 @@ const { Search } = Input;
 const { Footer, Content } = Layout;
 
 const IndexPage: React.FC = () => {
-	const { loading, jobs, loadJobs, query, setQuery, metadata } = useQuery({ select: JOBS_SELECT_QUERY })
+	const { loading, jobs, loadJobs, query, setQuery, metadata, resetJobs } = useQuery({ select: JOBS_SELECT_QUERY })
 	const { md, lg, } = useBreakpoint()
+	const [searchValue, setSearchValue] = useState<string>('')
 
 	const containerPadding = !md ? 0 : !lg ? 25 : 50;
 	const containerWidth = !md ? '95vw' : !lg ? '90vw' : '82.5vw';
@@ -32,6 +33,19 @@ const IndexPage: React.FC = () => {
 		setQuery({ ...query, page: metadata.page + 1 })
 	}
 
+	const onSearchClick = () => {
+		if (searchValue && query.keyword !== searchValue) {
+			resetJobs();
+			setQuery({ ...query, keyword: searchValue })
+		}
+	}
+
+	const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target) {
+			setSearchValue(event.target.value);
+		}
+	}
+
 	return (
 		<Layout style={{ background: 'white' }}>
 			<Content>
@@ -43,12 +57,20 @@ const IndexPage: React.FC = () => {
 
 					<Col span={24} >
 						<Row justify='center'>
-							<Search placeholder="Job title or keywords" size="large" allowClear enterButton="Search" style={{ ...s.search, width: searchWidth }} />
+							<Search
+								placeholder="Job title or keywords"
+								size="large"
+								allowClear
+								enterButton="Search"
+								value={searchValue}
+								onChange={onSearchChange}
+								onSearch={onSearchClick}
+								style={{ ...s.search, width: searchWidth }} />
 						</Row>
 					</Col>
 
 					<Col md={24} lg={24} xl={4} style={s.sidebar_container}>
-						<Sidebar query={query} setQuery={setQuery} />
+						<Sidebar query={query} setQuery={setQuery} reset={resetJobs} />
 					</Col>
 					<Col md={24} lg={20} >
 
@@ -57,6 +79,10 @@ const IndexPage: React.FC = () => {
 								<JobCard job={job} key={job.job_id} />
 							))}
 						</Space>
+
+						<ShowIf condition={!loading && jobs.length === 0}>
+							<Typography.Title level={4} style={{ textAlign: 'center' }}>No job was found</Typography.Title>
+						</ShowIf>
 
 						<ShowIf condition={loading && jobs.length === 0}>
 							<div style={{ textAlign: 'center', minHeight: '50vh' }}>

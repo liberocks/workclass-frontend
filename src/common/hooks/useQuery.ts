@@ -75,7 +75,12 @@ export const useQuery = ({ select = [] }: { select?: string[] }) => {
     }
   };
 
+  const resetJobs = () => {
+    setJobs([]);
+  };
+
   return {
+    resetJobs,
     loadJobs,
     loading,
     setLoading,
