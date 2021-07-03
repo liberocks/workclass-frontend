@@ -22,7 +22,7 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 
 	const onClickApplyButton = (event) => {
 		event.stopPropagation();
-		window.location.href = 'https://workclass.co/apply'
+		window.location.href = `https://workclass.co/apply/?fromwebsite=true&start=${job.job_id}`
 	}
 
 	const onClickCard = () => {

@@ -1,10 +1,8 @@
 import React from 'react'
 
-import { Card, Image, Button, Space, Tooltip, Grid, Row, Col, Tag } from "antd";
-
+import { Space, Tag } from "antd";
 
 import { JobTagProps } from './type'
-import { s } from './style';
 
 export const JobTag: React.FC<JobTagProps> = ({ job, showJobCategoryTag, showEmploymentTypeTag }) => {
   const renderTag = () => {

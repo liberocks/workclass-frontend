@@ -22,7 +22,7 @@ const { useBreakpoint } = Grid
 
 
 const JobDetail: React.FC<JobDetailProps> = (props) => {
-  const { jobs, loadJobs, query, setQuery } = useQuery({ select: JOBS_SELECT_QUERY });
+  const { jobs, loadJobs, query, setQuery, resetJobs, loading: jobsLoading } = useQuery({ select: JOBS_SELECT_QUERY });
   const [job, setJob] = useState<IDataJob | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -39,7 +39,7 @@ const JobDetail: React.FC<JobDetailProps> = (props) => {
     setLoading(true);
     getJob(job_id).then(res => {
       setJob(res.job)
-      setQuery({ page_size: 4, ...query, ...pickBy(res.job, (value, key) => value && (key.startsWith("employ_") || key.startsWith("job_"))) });
+      setQuery({ page_size: 3, ...query, ...pickBy(res.job, (value, key) => value && (key.startsWith("employ_") || key.startsWith("job_"))) });
     }).catch(() => {
       message.error("Failed to load jobs, please try again later");
     }).finally(() => {
@@ -49,6 +49,7 @@ const JobDetail: React.FC<JobDetailProps> = (props) => {
 
   useEffect(() => {
     // Fetch jobs corresponding to the query
+    resetJobs();
     loadJobs({ except: [parseInt(job_id)] });
   }, [query])
 
@@ -58,7 +59,7 @@ const JobDetail: React.FC<JobDetailProps> = (props) => {
 
   const onClickApplyButton = (event) => {
     event.stopPropagation();
-    window.location.href = 'https://workclass.co/apply'
+    window.location.href = `https://workclass.co/apply/?fromwebsite=true&start=${job_id}`
   }
 
   return (
@@ -114,7 +115,7 @@ const JobDetail: React.FC<JobDetailProps> = (props) => {
 
               </Col>
               <Col span={24} xxl={7} style={{ padding: `0 ${containerPadding}px` }}>
-                <ShowIf condition={jobs.length > 0}>
+                <ShowIf condition={!jobsLoading && jobs.length > 0}>
                   <p style={{ textAlign: 'center', color: 'grey' }}>Related Jobs</p>
                   <Space wrap size={[16, 16]} style={s.card_space} >
                     {jobs.map(job => (
