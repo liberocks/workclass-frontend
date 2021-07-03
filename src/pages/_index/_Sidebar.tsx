@@ -3,8 +3,8 @@ import React from 'react';
 import { Space, Collapse, Checkbox, Col, Form, Row, Grid, Radio, RadioChangeEvent, } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 
-import { s } from './style';
-import { SidebarProps } from './type'
+import { s } from './_style';
+import { SidebarProps } from './_type'
 
 
 

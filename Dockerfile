@@ -15,7 +15,10 @@ RUN yarn --pure-lockfile
 # Copy all frontend stuff to new "app" folder
 COPY . /app/
 
+RUN yarn clean
+RUN yarn build
+
 EXPOSE 1234
 
-CMD ["yarn", "start"]
+CMD ["yarn", "serve"]
 

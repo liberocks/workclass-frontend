@@ -8,8 +8,8 @@ import { JobCard, ShowIf, SEO } from '../../components';
 import { useQuery } from '../../common/hooks';
 import { JOBS_SELECT_QUERY } from '../../common/constant';
 
-import { s } from './style';
-import { Sidebar } from './Sidebar'
+import { s } from './_style';
+import { Sidebar } from './_Sidebar'
 
 const { useBreakpoint } = Grid
 const { Search } = Input;

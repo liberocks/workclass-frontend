@@ -14,7 +14,7 @@ import { SEO, JobTag, ShowIf, JobCard } from "../../components";
 import { useQuery } from "../../common/hooks";
 import { JOBS_SELECT_QUERY } from "../../common/constant";
 
-import { s } from './style';
+import { s } from './_style';
 
 const { Footer, Content } = Layout;
 const { useBreakpoint } = Grid
