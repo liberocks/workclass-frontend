@@ -1,5 +1,5 @@
 export interface JobTagProps {
-  showJobSpecTag?: boolean;
-  showEmploySpecTag?: boolean;
+  showJobCategoryTag?: boolean;
+  showEmploymentTypeTag?: boolean;
   job: IDataJob;
 }

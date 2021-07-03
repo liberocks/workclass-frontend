@@ -20,7 +20,7 @@ export const s: Stylesheet = {
   },
   button: {
     borderRadius: 8,
-    minWidth: 150,
+    minWidth: 125,
   },
   company_name: {
     color: "#666666",

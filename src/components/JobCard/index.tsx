@@ -17,7 +17,7 @@ const { useBreakpoint } = Grid;
 export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 	const { md, lg } = useBreakpoint()
 
-	const cardWidth = !md ? '95vw' : !lg ? 500 : 375;
+	const cardWidth = !md ? '95vw' : !lg ? 500 : 325;
 	const titleWidth = !md ? '80vw' : !lg ? 425 : 300;
 
 	const onClickApplyButton = (event) => {
@@ -53,7 +53,7 @@ export const JobCard: React.FC<JobCardProps> = memo(({ job }) => {
 			<p style={s.company_name}>{job.company_name}</p>
 
 			<p style={s.salary}>  ${job.salary_to} to ${job.salary_from} ({job.salary_period})</p>
-			<JobTag job={job} showEmploySpecTag />
+			<JobTag job={job} showEmploymentTypeTag />
 		</Card >
 	);
 });

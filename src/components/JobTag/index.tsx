@@ -6,12 +6,12 @@ import { Card, Image, Button, Space, Tooltip, Grid, Row, Col, Tag } from "antd";
 import { JobTagProps } from './type'
 import { s } from './style';
 
-export const JobSpecTag: React.FC<JobTagProps> = ({ job, showJobSpecTag, showEmploySpecTag }) => {
+export const JobSpecTag: React.FC<JobTagProps> = ({ job, showJobCategoryTag, showEmploymentTypeTag }) => {
   const renderTag = () => {
     const tags = []
 
     for (const [key, value] of Object.entries(job)) {
-      if (showJobSpecTag) {
+      if (showJobCategoryTag) {
         if (key === 'job_admin' && value) tags.push(<Tag color='blue'>Admin</Tag>)
         if (key === 'job_covid19' && value) tags.push(<Tag color='blue'>Covid19</Tag>)
         if (key === 'job_customerservice' && value) tags.push(<Tag color='blue'>Customer Service</Tag>)
@@ -25,14 +25,15 @@ export const JobSpecTag: React.FC<JobTagProps> = ({ job, showJobSpecTag, showEmp
         if (key === 'job_supplychain' && value) tags.push(<Tag color='blue'>Supply Chain</Tag>)
         if (key === 'job_transportation' && value) tags.push(<Tag color='blue'>Transportation</Tag>)
         if (key === 'job_warehouse' && value) tags.push(<Tag color='blue'>Warehouse</Tag>)
+        if (key === 'job_other' && value) tags.push(<Tag color='blue'>Other</Tag>)
       }
 
-      if (showEmploySpecTag) {
+      if (showEmploymentTypeTag) {
         if (key === "employ_adhoc" && value) tags.push(<Tag color="magenta">Adhoc</Tag>)
         if (key === "employ_contract" && value) tags.push(<Tag color="lime">Contract</Tag>)
-        if (key === "employ_fulltime" && value) tags.push(<Tag color="purple">Fulltime</Tag>)
+        if (key === "employ_fulltime" && value) tags.push(<Tag color="purple">Full-time</Tag>)
         if (key === "employ_internship" && value) tags.push(<Tag color="green">Internship</Tag>)
-        if (key === "employ_parttime" && value) tags.push(<Tag color="gold">Part Time</Tag>)
+        if (key === "employ_parttime" && value) tags.push(<Tag color="gold">Part-time</Tag>)
       }
     }
 
