@@ -59,7 +59,7 @@ export const useQuery = ({ select = [] }: { select?: string[] }) => {
           if (v === true) filters[k] = "1";
         } else if (k === "select") {
           if (v.length > 0) filters[k] = v.join(",");
-        } else if (v !== null || v !== "") {
+        } else if (v !== null && v !== "") {
           filters[k] = v;
         }
       }
