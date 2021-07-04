@@ -1,4 +1,5 @@
-export const MAIN_URL = process.env.GATSBY_API_URL;
+export const MAIN_URL =
+  process.env.GATSBY_API_URL || "http://13.212.166.212:8000";
 
 async function makeRequest<T>(request: IRequest, method: string): Promise<T> {
   let url = `${MAIN_URL}/${request.endpoint}`;

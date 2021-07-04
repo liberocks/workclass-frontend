@@ -1,4 +1,4 @@
-import { get, patch, post, del } from "./main.api";
+import { get } from "./main.api";
 
 export const getJobs = async (
   filters?: IJobsFilter
