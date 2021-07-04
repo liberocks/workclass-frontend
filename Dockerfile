@@ -1,5 +1,5 @@
 # base image
-FROM node:16
+FROM node:14
 
 # set working directory
 RUN mkdir /app
@@ -20,5 +20,5 @@ RUN yarn build
 
 EXPOSE 1234
 
-CMD ["yarn", "serve", "-p", "1234"]
+CMD ["yarn", "serve", "-p", "1234", "-H", "0.0.0.0"]
 

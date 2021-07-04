@@ -117,7 +117,7 @@ const JobDetail: React.FC<PageProps> = (props) => {
                 <ShowIf condition={!jobsLoading && jobs.length > 0}>
                   <p style={{ textAlign: 'center', color: 'grey' }}>Related Jobs</p>
                   <Space wrap size={[16, 16]} style={s.card_space} >
-                    {jobs.map(job => (
+                    {jobs.slice(0, 4).map(job => (
                       <JobCard job={job} key={job.job_id} />
                     ))}
                   </Space>
