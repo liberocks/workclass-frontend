@@ -1,6 +1,6 @@
 export interface IState {
-	// Enter your typing here.
-	persistence: {};
+  // Enter your typing here.
+  persistence: {};
 }
 
 /**
@@ -8,16 +8,16 @@ export interface IState {
  */
 
 export enum EActionType {
-	UPDATE_PERSISTENT_DATA,
-	CLEAR_PERSISTENT_DATA
+  UPDATE_PERSISTENT_DATA,
+  CLEAR_PERSISTENT_DATA,
 }
 export interface IAction {
-	type: EActionType;
+  type: EActionType;
 }
 
 export interface IActionUpdatePersistence extends IAction {
-	data: {
-		key: string;
-		value: unknown;
-	};
+  data: {
+    key: string;
+    value: unknown;
+  };
 }

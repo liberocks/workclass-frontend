@@ -1,7 +1,12 @@
+import {
+  DEFAULT_KEYWORD,
+  DEFAULT_IMAGE,
+  DEFAULT_TITLE,
+  DEFAULT_DESCRIPTION,
+} from "../../common/constant";
 import { SEOProps } from "./type";
 import React, { memo } from "react";
 import Helmet from "react-helmet";
-import { DEFAULT_KEYWORD, DEFAULT_IMAGE, DEFAULT_TITLE, DEFAULT_DESCRIPTION } from "../../common/constant";
 
 export const SEO: React.FC<SEOProps> = memo((props) => {
   const {

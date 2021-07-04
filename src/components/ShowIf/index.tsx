@@ -1,7 +1,6 @@
-import React from 'react';
-
-import { ShowIfProps } from './type';
+import { ShowIfProps } from "./type";
+import React from "react";
 
 export const ShowIf: React.FC<ShowIfProps> = ({ condition, children }) => {
-  return condition ? <>{children}</> : null
-}
+  return condition ? <>{children}</> : null;
+};
