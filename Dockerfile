@@ -23,5 +23,3 @@ EXPOSE 1234
 RUN chmod +x /app/script/entrypoint.sh
 ENTRYPOINT ["/bin/sh", "/app/script/entrypoint.sh"]
 
-CMD ["yarn", "serve", "-p", "1234", "-H", "0.0.0.0"]
-
