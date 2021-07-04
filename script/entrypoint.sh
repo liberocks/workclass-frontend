@@ -1,0 +1,1 @@
+echo "GATSBY_API_URL=$GATSBY_API_URL" > .env
