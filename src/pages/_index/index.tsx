@@ -43,7 +43,7 @@ const IndexPage: React.FC = () => {
   };
 
   const onSearchClick = () => {
-    if (searchValue && query.keyword !== searchValue) {
+    if (query.keyword !== searchValue) {
       resetJobs();
       setQuery({ ...query, keyword: searchValue });
     }
